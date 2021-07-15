@@ -268,19 +268,7 @@ wald.test(b = coef(lib.model), Sigma = vcov(lib.model), L = l)
 # Independence Assumptions #
 ############################
 
-# Here, such independence can be determined with chisq.tests.
-# Where the count of both variables is less than five, use the exact fisher.tests
-
-# there are three other methods to perform the Chi-square test of independence in R:
-
-# with the summary() function
-# with the assocstats() function from the {vcd} package
-# with the ctable() function from the {summarytools} package
-
-test <- chisq.test(table(libraries.cleaned$parent, libraries.cleaned$age))
-test
-f.test <- fisher.test(libraries.cleaned$parent, libraries.cleaned$age, simulate.p.value = TRUE)
-f.test
+# The observations are independent, so this assumption is met
 
 ########################
 # Linearity Assumption #
