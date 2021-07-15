@@ -205,7 +205,7 @@ libraries.cleaned$educ <- as.factor(libraries.cleaned$educ)
 libraries.cleaned$rurality <- as.factor(libraries.cleaned$rurality)
 
 # estimate the library use model and print results
-lib.model <- glm(uses.lib ~ age + sex + educ + parent + disabled + rurality +                               raceth + ses,
+lib.model <- glm(uses.lib ~ age + sex + educ + parent + disabled + rurality + raceth + ses,
                  data = libraries.cleaned,
                  na.action = na.exclude,
                  family = binomial("logit"))
@@ -323,10 +323,10 @@ lib.model$fitted.values
 # can use a generalised additive model instead, using a gam() function
 
 lib.model_gam <- gam(uses.lib ~ age + sex + educ + parent + disabled + 
-                       rurality + raceth + ses,
-                 data = libraries.cleaned,
-                 na.action = na.exclude,
-                 family = binomial("logit"))
+                     rurality + raceth + ses,
+                     data = libraries.cleaned,
+                     na.action = na.exclude,
+                     family = binomial("logit"))
 
 summary(lib.model_gam)
 
