@@ -61,10 +61,13 @@ print(table.desc,
 
 # get a table of descriptive statistics with bivariate tests
 
-# Age is an abnormal continous variable and the outcome variable of interest is the library use variable, which indicates whether someone used library facilities or not. This library use is a categorical variable with two classes. To examine a relationship between one categorical variables (with two categories) and a continous one, the Mann-Whitney U test is suitable. The CreateTableOne () function below automatically uses the correct test based on variable types in the data.
+# Age is an abnormal continous variable and the outcome variable of interest is the library use variable, which indicates whether someone used library facilities or not. 
+# This library use is a categorical variable with two classes. To examine a relationship between one categorical variables (with two categories) and a continous one, 
+# the Mann-Whitney U test is suitable. The CreateTableOne () function below automatically uses the correct test based on variable types in the data.
 # The p-value indicates the statistical significance of association between each individual variable and the outcome variable which is library use.
 # SES and raceth variables are insignficant when paired with library use.
-# It is important to also identify possible categories that may drive significant results for the bivariate test.Sex is particularly significant. 59% of those who dont use the library are men, while for library users, 55% are women.
+# It is important to also identify possible categories that may drive significant results for the bivariate test.Sex is particularly significant. 
+# 59% of those who dont use the library are men, while for library users, 55% are women.
 
 table.desc <- CreateTableOne(data = libraries.cleaned,
                              strata = 'uses.lib',
@@ -129,7 +132,8 @@ iv_df
 libraries.cleaned$uses.lib <- as.factor(libraries.cleaned$uses.lib)
 levels(x = libraries.cleaned$uses.lib)
 
-# Because the yes category is second, the model will predict the yes rather than the no. In this situation, the ordering makes sense, but in situations where it is not, mutate and relevel functions can be used
+# Because the yes category is second, the model will predict the yes rather than the no. In this situation, the ordering makes sense, but in situations where it is not, 
+# mutate and relevel functions can be used
 
 # make no the reference group
 # libraries.cleaned <- libraries.cleaned %>%
@@ -145,7 +149,8 @@ lib.model.small <- glm(formula = uses.lib ~ age,
                        family = binomial("logit"))
 summary(object = lib.model.small)
 
-# The model deviance with predictor variable included is less (closer to zero) than the null model, which means the full model is doing a statistically significant better job at predicting observed values than the null model.
+# The model deviance with predictor variable included is less (closer to zero) than the null model, which means the full model is doing a statistically significant 
+# better job at predicting observed values than the null model.
 
 # The p value of 0.00105 means there is a 0.00105% probability that this sample came from a population where there was no relationship between age and library use
 
@@ -155,7 +160,8 @@ summary(object = lib.model.small)
 
 odds.n.ends(lib.model.small)
 
-# the odds ratio for the age varible is 0.991201, which means that the odds of libray use decrease by 1% for every 1-year increase in age. Where odds ratios are less than 1, interpretation becomes easier when one subtracts the odds ratio from 1 and multiply by 100 to convert it into a percentage. The confidence interval doesn't cross one, so we can be sure the OR value is statistically significant. An odds ratio of 1 is that the odds are 1 times higher or 1 times a high for a change in the predictor, which is essentially the same odds. When the CI includes 1, the odds ratio could be 1 and this indicates it is not statistically different from 1. A relative risk of 1 is also similarly problematic. The null hypothesis cannot be rejected.
+# the odds ratio for the age varible is 0.991201, which means that the odds of libray use decrease by 1% for every 1-year increase in age. Where odds ratios are less than 1, 
+# interpretation becomes easier when one subtracts the odds ratio from 1 and multiply by 100 to convert it into a percentage. The confidence interval doesn't cross one, so we can be sure the OR value is statistically significant. An odds ratio of 1 is that the odds are 1 times higher or 1 times a high for a change in the predictor, which is essentially the same odds. When the CI includes 1, the odds ratio could be 1 and this indicates it is not statistically different from 1. A relative risk of 1 is also similarly problematic. The null hypothesis cannot be rejected.
 
 #####################################################
 # Prediction Accuracy Percentage or Count R squared #
@@ -207,10 +213,14 @@ odds.n.ends(lib.model)
 summary(lib.model)
 
 # a model containing all these variables was statistically significantly better thn the baseline probability at predicting library use. 
-# The chi squared statistic of 94.74, while the p - value is <.001. Therefore, the probability of obtaining a chi square statistic of this value or larger if the null hypothesis is true is <.001. Therefore, the null hypothesis is rejected.
+# The chi squared statistic of 94.74, while the p - value is <.001. Therefore, the probability of obtaining a chi square statistic of this value or larger if the null 
+# hypothesis is true is <.001. Therefore, the null hypothesis is rejected.
 
-# With predictor variables of at least two levels, the odds ratio indicates the change going from the reference level to the other levels. In this example, sexmale is listed, which means that men are the reference level. The odds ratio is .51 (1 - .49 = .51) * 100. This means that men have 51% lower odds of using the library than women. 
-# For categorical variables with more than two levels, each individual level is listed as seperate predictors in the logistic regression output. The level that is not listed is the reference group. Therefore, in this example, the education reference group is high school. Therefore, when we take education of at least four year degree or more, the odds ratio is 1.9040694. This means that people with degrees of four or more years are 1.9 times more likely to use a library than high school students.
+# With predictor variables of at least two levels, the odds ratio indicates the change going from the reference level to the other levels. In this example, sexmale is listed, 
+# which means that men are the reference level. The odds ratio is .51 (1 - .49 = .51) * 100. This means that men have 51% lower odds of using the library than women. 
+# For categorical variables with more than two levels, each individual level is listed as seperate predictors in the logistic regression output. The level that is not listed
+# is the reference group. Therefore, in this example, the education reference group is high school. Therefore, when we take education of at least four year degree or more, 
+# the odds ratio is 1.9040694. This means that people with degrees of four or more years are 1.9 times more likely to use a library than high school students.
 
 # Non Significant odds ratios greater than 1 #
 
@@ -219,7 +229,8 @@ summary(lib.model)
 
 # Non Significant odds ratios less than 1 #
 
-# The low ses category has an odds ratio of .93 and a CI that includes 1. Therefore, the odds of library use ae not statistically significantly different for those with low SES compared to those in the reference group of high SES.
+# The low ses category has an odds ratio of .93 and a CI that includes 1. Therefore, the odds of library use ae not statistically significantly different for those with 
+# low SES compared to those in the reference group of high SES.
 
 #########################################
 #########################################
@@ -295,11 +306,13 @@ linearity.data %>%
                                                        "deeppink")) +
   scale_size_manual(values = 1.5, name = "")
 
-# The loess curve is very close to linear fit line apart from those aged less than 25. Perhaps young people can be removed from the sample. Therefore, apart from young people, linear assumption is met.
+# The loess curve is very close to linear fit line apart from those aged less than 25. Perhaps young people can be removed from the sample. Therefore, apart from young 
+# people, linear assumption is met.
 
 # To indicate probabilities of each observation 
 
-# in the environment pane in R studio, click the small arrow next to the model name (lib.model) and then look for fitted values in the drop down text/ Alternatively, use the below code
+# in the environment pane in R studio, click the small arrow next to the model name (lib.model) and then look for fitted values in the drop down text'
+# Alternatively, use the below code
 
 lib.model$fitted.values
 
@@ -387,7 +400,9 @@ influence.lib %>%
 #############################################
 
 # Leverage values range between 0 and 1.
-# To determine which leverage values indicate influential observations, a formula is used: 2*13/1601. 13 is the number of parameters, which is the total number of predictors in the model, including the intercept. The full list of predictors is listed in the summary() function. The last number is the number of rows in the data set, which in this case is 1601
+# To determine which leverage values indicate influential observations, a formula is used: 2*13/1601. 13 is the number of parameters, which is the total number of predictors 
+# in the model, including the intercept. The full list of predictors is listed in the summary() function. The last number is the number of rows in the data set, which in 
+# this case is 1601
 
 # observations with high Leverage
 influence.lib %>%
