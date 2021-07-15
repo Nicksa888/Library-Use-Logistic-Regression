@@ -95,7 +95,7 @@ iv_df <- data.frame(VARS = c(factor_vars, continuous_vars),
 
 # compute IV for categoricals
 for(factor_var in factor_vars){
-  smbc <- smbinning.factor(libraries.cleaned, y="uses.lib", x=factor_var)  # WOE table
+  smbc <- smbinning.factor(libraries.cleaned, y = "uses.lib", x = factor_var)  # WOE table
   if(class(smbc) != "character"){ # check if some error occured
     iv_df[iv_df$VARS == factor_var, "IV"] <- smbc$iv
   }
@@ -103,7 +103,7 @@ for(factor_var in factor_vars){
 
 # compute IV for continuous vars
 for(continuous_var in continuous_vars){
-  smb <- smbinning(libraries.cleaned, y="uses.lib", x=continuous_var)  # WOE table
+  smb <- smbinning(libraries.cleaned, y = "uses.lib", x = continuous_var)  # WOE table
   if(class(smb) != "character"){  # any error while calculating scores.
     iv_df[iv_df$VARS == continuous_var, "IV"] <- smb$iv
   }
